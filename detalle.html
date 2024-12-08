@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Producto</title>
+  <link rel="icon" href="./img/favicon (1).ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <style>
+    body {
+      background-image: url(./img/2.jpg);
+      font-family: 'Bangers', sans-serif;
+    }
+    .breadcrumb {
+      background-color: transparent;
+      padding: 0;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+    }
+    .breadcrumb a {
+      color: #e63946;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .comic-card {
+      border: 5px solid black;
+      padding: 20px;
+      box-shadow: 10px 10px 0 #000;
+      background-color: white;
+      text-align: center;
+    }
+    .comic-title {
+      font-size: 2.5rem;
+      color: #e63946;
+      text-shadow: 2px 2px 0px black;
+    }
+    .comic-thumbnail {
+      max-width: 100%;
+      border: 5px solid black;
+      box-shadow: 5px 5px 0 black;
+    }
+    .comic-details {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      text-align: justify;
+    }
+    .quantity-control {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 20px 0;
+    }
+    .quantity-control button {
+      font-size: 1.5rem;
+      padding: 5px 15px;
+      background-color: #e63946;
+      color: white;
+      border: none;
+      box-shadow: 3px 3px 0 black;
+      cursor: pointer;
+    }
+    .quantity-control button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .back-btn {
+      background-color: #e63946;
+      color: white;
+      border: none;
+      font-size: 1.2rem;
+      padding: 10px 20px;
+      cursor: pointer;
+      box-shadow: 3px 3px 0 black;
+      transition: transform 0.2s ease;
+    }
+    .back-btn:hover {
+      transform: scale(1.05);
+    }
+    .row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .col-left {
+      flex: 0 0 60%; 
+      padding-right: 30px; 
+    }
+    .col-right {
+      flex: 0 0 40%; 
+      text-align: center;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="detalleApp" class="container mt-5">
+
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: rgb(122, 15, 15);">
+      <div class="container-fluid">
+        <a class="text-white" style="font-family: 'Bangers', cursive;" href="index.html">Mundo Marvel</a>
+        <a href="carrito.html" class="text-white">🛒 Carrito ({{ totalArticulos }})</a>      </div>
+    </nav>
+
+    <div class="comic-card">
+      <br>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Menú Principal</a></li>
+        <li class="breadcrumb-item active" aria-current="page">{{ producto.title }}</li>
+      </ol>
+    </nav>
+      <div class="row">
+
+
+
+
+        <div class="col-left">
+          <h1 class="comic-title">{{ producto.title }}</h1>
+          <p class="comic-details"><strong>Categoría:</strong> Comic</p>
+          <p class="comic-details"><strong>Descripción:</strong> Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+            Harum tempore odit consequatur aperiam inventore. Impedit earum, quibusdam 
+            dignissimos unde doloribus tempore facere dolorum sunt commodi! Animi atque omnis incidunt inventore?</p>
+          <p class="comic-details"><strong>Precio:</strong> ${{ producto.price }}</p>
+          <div class="quantity-control">
+            <button @click="modificarCantidad(-1)" :disabled="cantidad <= 1">-</button>
+            <span class="mx-3">{{ cantidad }}</span>
+            <button @click="modificarCantidad(1)" :disabled="cantidad >= 6">+</button>
+          </div>
+
+          <button class="back-btn" @click="agregarAlCarrito">Agregar</button>
+          <br>
+<br>
+        </div>
+
+        <div class="col-right">
+          <img :src="producto.thumbnail" :alt="producto.title" class="comic-thumbnail mb-4">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./js/detalle.js"></script>
+  <script src="./js/carrito.js"></script>
+</body>
+</html>

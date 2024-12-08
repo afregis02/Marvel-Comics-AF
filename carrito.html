@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito de Compras</title>
+  <link rel="icon" href="./img/favicon (1).ico" type="image/x-icon">
+
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Bangers', cursive;
+      background-image: url(./img/2.jpg);
+      background-size: cover; /* Asegúrate de que la imagen cubra todo el fondo */
+      background-position: center; /* Centra la imagen de fondo */
+    }
+    .breadcrumb {
+      background-color: transparent;
+      font-size: 1.2rem;
+    }
+    .breadcrumb a {
+      color: #e63946;
+      text-decoration: none;
+    }
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+    .container {
+      background-color: white; /* Fondo blanco para el contenedor */
+      padding: 20px; /* Espaciado interno */
+      border-radius: 8px; /* Bordes redondeados */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    }
+    table {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="carritoApp" class="container mt-5">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Carrito ({{ totalArticulos }})</li>
+      </ol>
+    </nav>
+
+    <h1>Carrito de Compras</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Imagen</th>
+          <th>Nombre</th>
+          <th>Cantidad</th>
+          <th>Precio</th>
+          <th>Importe</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="item in carrito" :key="item.id">
+          <td><img :src="item.thumbnail" alt="comic" width="50"></td>
+          <td>{{ item.title }}</td>
+          <td><input type="number" v-model="item.cantidad" min="1" max="10" @input="actualizarCantidad(item)"></td>
+          <td>${{ item.price }}</td>
+          <td>${{ calcularImporte(item) }}</td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="4" class="text-right"><strong>Subtotal:</strong></td>
+          <td>${{ subtotal }}</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="text-right"><strong>IVA (16%):</strong></td>
+          <td>${{ iva }}</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="text-right"><strong>Total:</strong></td>
+          <td>${{ total }}</td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script src="./js/carrito.js"></script>
+</body>
+</html>
